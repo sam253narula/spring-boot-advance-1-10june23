@@ -1,0 +1,27 @@
+Spring Boot Hibernate Notes:
+
+The spring.jpa.hibernate.ddl-auto property in Spring Boot is used to configure the automatic DDL (Data Definition Language) generation by Hibernate, the ORM (Object-Relational Mapping) framework used by default in Spring Boot applications. This property determines how Hibernate should handle the database schema generation.
+
+Here are the different values that can be assigned to the spring.jpa.hibernate.ddl-auto property:
+
+none: This is the default value. It tells Hibernate to not perform any schema generation or validation. It assumes that the database schema is already created and will not make any changes to it.
+
+validate: With this value, Hibernate will validate the database schema against the entity mappings at startup. If there is a mismatch or inconsistency between the entity definitions and the database schema, an exception will be thrown.
+
+update: This value instructs Hibernate to update the database schema based on the entity mappings. It will add missing tables, columns, and constraints, but it will not remove or modify existing schema objects. However, it's important to note that this mode is considered risky in production as it may cause data loss or data corruption.
+
+create: With this value, Hibernate will create the database schema from scratch. It will drop and recreate all tables and constraints defined in the entity mappings. Existing data in the tables will be lost. This mode is typically used in development or testing environments where you want a fresh schema for each run.
+
+create-drop: This value is similar to the create mode, but it also drops the database schema at the end of the application's execution. It's useful for running tests that require a clean database for each test run.
+
+create-only: This mode is not part of the standard Hibernate configuration, but it's specific to Spring Boot. It creates the schema on application startup and disables any modifications to the schema during the application's runtime. It's useful if you want to initialize the database schema once and prevent any accidental modifications.
+
+These are the available values for the spring.jpa.hibernate.ddl-auto property. You can choose the one that best suits your requirements based on the stage of development or deployment you are in.
+
+Default fetch type rule:
+1) *ToOne : Eager
+2) *ToMany : Lazy
+
+
+mappedBy Rule:
+Add this attribute to mapping annotation of the class that you want to mark as non-owning side of the relationship
